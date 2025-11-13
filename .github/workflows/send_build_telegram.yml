@@ -21,7 +21,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Assemble Release APK
-        run: ./gradlew assembleDevRelease --stacktrace
+        run: ./gradlew assembleRelease --stacktrace
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4

@@ -1,0 +1,55 @@
+name: Android Release CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-apk:
+    name: Build & Send APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Assemble Release APK
+        run: ./gradlew assembleDevRelease --stacktrace
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: drclove-dev-release
+          path: app/build/outputs/apk/dev/release/app-dev-release.apk
+
+      # 🟢 Envoi Telegram
+      - name: Send APK to Telegram
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          document: app/build/outputs/apk/dev/release/app-dev-release.apk
+          message: |
+            📦 *New Release Built Successfully!*
+            🌿 *Branch:* main
+            🔗 [Repository](https://github.com/${{ github.repository }})
+
+      # 🔴 Échec
+      - name: Notify failure on Telegram
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          format: markdown
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ❌ *Release build failed*
+            🔗 [Repository](https://github.com/${{ github.repository }})

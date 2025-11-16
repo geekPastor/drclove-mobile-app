@@ -8,6 +8,7 @@ import androidx.navigation.NavOptionsBuilder
 sealed class Destination(val route: Routes){
     data object SplashScreen: Destination(Routes.SplashScreen)
     data object WelcomeScreen: Destination(Routes.WelcomeScreen)
+    data object OnBoardingScreen: Destination(Routes.OnBoardingScreen)
 }
 
 fun NavDestination?.isCurrentDestination(destination: Destination): Boolean{

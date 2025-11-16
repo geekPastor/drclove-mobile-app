@@ -45,23 +45,23 @@ import dev.geekpastor.drclove.ui.theme.DrcLoveTheme
 
 @Composable
 fun WelcomeRoute(
-    navigateToLogin: () -> Unit,
+    navigateToOnBoarding: () -> Unit,
 ){
     Welcome(
-        navigateToLogin = navigateToLogin
+        navigateToOnBoarding = navigateToOnBoarding
     )
 }
 
 @Composable
 fun Welcome(
-    navigateToLogin: () -> Unit = {}
+    navigateToOnBoarding: () -> Unit = {}
 ) {
 
     // --- ANIMATION STATES ---
     val logoScale = remember { Animatable(0f) }
     val textScale = remember { Animatable(0f) }
     val circleScale = remember { Animatable(0f) }
-    val bottomOffset = remember { Animatable(200f) } // 200dp vers le bas
+    val bottomOffset = remember { Animatable(250f) } // 200dp vers le bas
 
     // --- LAUNCH ALL ANIMATIONS ---
     LaunchedEffect(Unit) {
@@ -146,12 +146,12 @@ fun Welcome(
                 )
             )
 
-            Spacer(Modifier.height(150.dp))
+            Spacer(Modifier.height(60.dp))
 
             // --- PROFILE CIRCLE WITH RINGS (ANIMÉ) ---
             Box(
                 modifier = Modifier
-                    .size(260.dp)
+                    .size(230.dp)
                     .scale(circleScale.value),
                 contentAlignment = Alignment.Center
             ) {
@@ -183,7 +183,7 @@ fun Welcome(
                 SmallAvatar(painterResource(R.drawable.avatar_5), Modifier.align(Alignment.BottomEnd))
             }
 
-            Spacer(Modifier.height(100.dp))
+            Spacer(Modifier.height(80.dp))
 
             // --- BUTTON ANIMÉ (SLIDE UP) ---
             Column(
@@ -192,7 +192,7 @@ fun Welcome(
             ) {
 
                 Button(
-                    onClick = navigateToLogin,
+                    onClick = navigateToOnBoarding,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)

@@ -1,5 +1,10 @@
 package dev.geekpastor.drclove.ui.screens.onboarding
 
+import androidx.compose.animation.core.Easing
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -257,10 +262,61 @@ fun OnBoardingScreen(
     }
 }
 
-
 @Composable
 fun LastOnBoardingPage(page: OnBoardingPage) {
 
+    val OvershootPop = Easing { fraction ->
+        // Effet overshoot style "pop"
+        val tension = 2.2f
+        val t = fraction - 1f
+        t * t * ((tension + 1) * t + tension) + 1f
+    }
+
+    // --- Animation trigger ---
+    var startAnimation by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        startAnimation = true
+    }
+
+    // --- Animations images ---
+    val leftRotation by animateFloatAsState(
+        targetValue = if (startAnimation) -12f else 0f,
+        animationSpec = tween(900, easing = FastOutSlowInEasing)
+    )
+
+    val rightRotation by animateFloatAsState(
+        targetValue = if (startAnimation) 12f else 0f,
+        animationSpec = tween(900, easing = FastOutSlowInEasing)
+    )
+
+    val leftOffsetX by animateDpAsState(
+        targetValue = if (startAnimation) (-60).dp else 0.dp,
+        animationSpec = tween(900, easing = FastOutSlowInEasing)
+    )
+
+    val rightOffsetX by animateDpAsState(
+        targetValue = if (startAnimation) (60).dp else 0.dp,
+        animationSpec = tween(900, easing = FastOutSlowInEasing)
+    )
+
+    val rightOffsetY by animateDpAsState(
+        targetValue = if (startAnimation) 80.dp else 0.dp,
+        animationSpec = tween(900, easing = FastOutSlowInEasing)
+    )
+
+    // --- Animations icônes ---
+    val loveScale by animateFloatAsState(
+        targetValue = if (startAnimation) 1f else 0f,
+        animationSpec = tween(600, delayMillis = 600, easing = OvershootPop)
+    )
+
+    val messageScale by animateFloatAsState(
+        targetValue = if (startAnimation) 1f else 0f,
+        animationSpec = tween(600, delayMillis = 700, easing = OvershootPop)
+    )
+
+
+    // ==== UI ====
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -275,59 +331,56 @@ fun LastOnBoardingPage(page: OnBoardingPage) {
                 contentAlignment = Alignment.Center
             ) {
 
-                // IMAGE DROITE (décalée vers la droite + descendue)
+                // --- IMAGE DROITE ---
                 Image(
                     painter = painterResource(id = page.images[1]),
                     contentDescription = null,
                     modifier = Modifier
                         .height(260.dp)
                         .width(160.dp)
-                        .offset(
-                            x = 60.dp,   // ➜ DÉCALAGE À DROITE
-                            y = 80.dp    // ➜ DÉCALAGE EN BAS
-                        )
+                        .offset(x = rightOffsetX, y = rightOffsetY)
                         .graphicsLayer {
-                            rotationZ = 12f
+                            rotationZ = rightRotation
                         }
                         .clip(RoundedCornerShape(26.dp))
                         .border(3.dp, Color.White, RoundedCornerShape(26.dp)),
                     contentScale = ContentScale.Crop
                 )
 
-                // IMAGE GAUCHE (décalée vers la gauche)
+                // --- IMAGE GAUCHE ---
                 Image(
                     painter = painterResource(id = page.images[0]),
                     contentDescription = null,
                     modifier = Modifier
                         .height(260.dp)
                         .width(160.dp)
-                        .offset(x = (-60).dp)   // ➜ DÉCALAGE À GAUCHE
+                        .offset(x = leftOffsetX)
                         .graphicsLayer {
-                            rotationZ = -12f
+                            rotationZ = leftRotation
                         }
                         .clip(RoundedCornerShape(26.dp))
                         .border(3.dp, Color.White, RoundedCornerShape(26.dp)),
                     contentScale = ContentScale.Crop
                 )
 
-                // Icône "love"
+                // --- Icône LOVE (pop) ---
                 Image(
                     painter = painterResource(id = page.images[2]),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(55.dp)
+                        .size(55.dp * loveScale)   // effet POP
                         .align(Alignment.Center)
-                        .offset(x = (15).dp, y = (-60).dp)
+                        .offset(x = 15.dp, y = (-60).dp)
                 )
 
-                // Icône "message"
+                // --- Icône MESSAGE (pop) ---
                 Image(
                     painter = painterResource(id = page.images[3]),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(30.dp * messageScale)
                         .align(Alignment.Center)
-                        .offset(x = (-50).dp, y = (150).dp)
+                        .offset(x = (-50).dp, y = 150.dp)
                 )
             }
         }

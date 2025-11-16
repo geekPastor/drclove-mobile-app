@@ -37,7 +37,7 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           format: markdown
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
             ✅ *Build Succeeded*
@@ -51,7 +51,7 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           format: markdown
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
             ❌ *Build Failed*

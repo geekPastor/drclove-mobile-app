@@ -26,17 +26,17 @@ jobs:
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: drclove-dev-release
-          path: app/build/outputs/apk/dev/release/app-dev-release.apk
+          name: drclove-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       # 🟢 Envoi Telegram
       - name: Send APK to Telegram
         if: success()
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          document: app/build/outputs/apk/dev/release/app-dev-release.apk
+          document: app/build/outputs/apk/debug/app-debug.apk
           message: |
             📦 *New Release Built Successfully!*
             🌿 *Branch:* main
@@ -48,7 +48,7 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           format: markdown
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
             ❌ *Release build failed*

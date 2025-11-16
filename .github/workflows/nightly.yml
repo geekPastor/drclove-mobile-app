@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: drclove-nightly
-          path: app/build/outputs/apk/dev/release/app-dev-release.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       # 🟢 Notifier succès
       - name: Notify success on Telegram
@@ -49,8 +49,8 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          document: app/build/outputs/apk/dev/release/app-dev-release.apk
+          to: ${{ secrets.CHAT_ID }}
+          document: app/build/outputs/apk/debug/app-debug.apk
           message: |
             🌙 *Nightly Build Complete*
             📅 Date: ${{ github.run_started_at }}
@@ -66,7 +66,7 @@ jobs:
         with:
           format: markdown
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.CHAT_ID }}
           message: |
             ❌ *Nightly build failed!*
             📅 Date: ${{ github.run_started_at }}

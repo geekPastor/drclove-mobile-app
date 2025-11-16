@@ -73,7 +73,7 @@ fun Splash(navController: NavHostController) {
         }
 
         // attendre avant navigation
-        delay(2000)
+        delay(1000)
         val destination = Destination.WelcomeScreen.route.name
         navController.navigate(destination) {
             popUpTo(Destination.SplashScreen.route.name) { inclusive = true }
@@ -120,13 +120,6 @@ fun Splash(navController: NavHostController) {
                     .width(200.dp)
                     .scale(logoScale.value)
                     .alpha(logoAlpha.value) // fade-in
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(
-                text = "Découvrez l’amour comme jamais auparavant",
-                style = MaterialTheme.typography.labelLarge.copy(fontSize = 14.sp)
             )
         }
     }

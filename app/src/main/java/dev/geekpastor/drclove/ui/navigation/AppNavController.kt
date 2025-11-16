@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.geekpastor.drclove.ui.screens.onboarding.OnBoardingRoute
 import dev.geekpastor.drclove.ui.screens.splash.SplashRoute
 import dev.geekpastor.drclove.ui.screens.welcome.WelcomeRoute
 
@@ -32,7 +33,14 @@ fun AppNavController(
             route = Destination.WelcomeScreen.route.name
         ){
             WelcomeRoute {
+                navController.navigate(Destination.OnBoardingScreen.route.name)
             }
+        }
+
+        composable(
+            route = Destination.OnBoardingScreen.route.name
+        ){
+            OnBoardingRoute {  }
         }
     }
 }

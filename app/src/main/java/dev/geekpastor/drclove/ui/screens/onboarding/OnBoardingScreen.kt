@@ -13,16 +13,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -39,16 +35,16 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OnBoardingRoute(
-    navigateToLogin: () -> Unit = {},
+    navigateToLoginChoice: () -> Unit = {},
 ){
     OnBoardingScreen(
-        navigateToLogin = navigateToLogin
+        navigateToLoginChoice = navigateToLoginChoice
     )
 }
 
 @Composable
 fun OnBoardingScreen(
-    navigateToLogin: () -> Unit
+    navigateToLoginChoice: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
@@ -210,6 +206,8 @@ fun OnBoardingScreen(
                             scope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
                             }
+                        }else{
+                            navigateToLoginChoice()
                         }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
@@ -218,7 +216,7 @@ fun OnBoardingScreen(
                         .height(50.dp),
                     shape = RoundedCornerShape(40.dp)
                 ) {
-                    Text("Retour", color = Color.Black)
+                    Text( text = if (pagerState.currentPage > 0) "Retour" else "Sauter", color = Color.Black)
                 }
 
                 // Suivant / Terminer
@@ -242,7 +240,7 @@ fun OnBoardingScreen(
                                     pagerState.animateScrollToPage(pagerState.currentPage + 1)
                                 }
                             } else {
-                                navigateToLogin()
+                                navigateToLoginChoice()
                             }
                         },
                     contentAlignment = Alignment.Center

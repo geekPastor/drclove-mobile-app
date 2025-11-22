@@ -1,4 +1,4 @@
-package dev.geekpastor.drclove.ui.screens.login
+package dev.geekpastor.drclove.ui.screens.register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.geekpastor.drclove.R
@@ -45,22 +45,24 @@ import dev.geekpastor.drclove.ui.components.SocialButton
 import dev.geekpastor.drclove.ui.theme.DrcLoveTheme
 
 @Composable
-fun LoginRoute(
+fun RegisterRoute(
     navigateToHome: () -> Unit = {},
-    navigateToRegister: () -> Unit = {}
-) {
-    LoginScreen(
+    navigateToLogin: () -> Unit = {}
+){
+    RegisterScreen(
         navigateToHome = navigateToHome,
-        navigateToRegister = navigateToRegister
+        navigateToLogin = navigateToLogin
     )
 }
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navigateToHome: () -> Unit = {},
-    navigateToRegister: () -> Unit = {}
-) {
+    navigateToLogin: () -> Unit = {}
+){
+
     var email by remember { mutableStateOf("") }
+    var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
@@ -73,6 +75,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(56.dp))
 
         // ---------- LOGO / TITRE ----------
+
         Image(
             painter = painterResource(id = R.drawable.splash_logo),
             contentDescription = null,
@@ -82,7 +85,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Connectez-vous",
+            text = "Inscrivez-vous",
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF2C2C2C)
@@ -90,6 +93,38 @@ fun LoginScreen(
         )
 
         Spacer(modifier = Modifier.height(40.dp))
+
+        // ---------- CHAMP Nom complet ----------
+        OutlinedTextField(
+            value = userName,
+            onValueChange = { userName = it },
+            modifier = Modifier
+                .fillMaxWidth(),
+            placeholder = {
+                Text("Taper votre nom complet")
+            },
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = null,
+                    tint = Color(0xFFFF4B8B)
+                )
+            },
+            shape = RoundedCornerShape(50.dp),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                cursorColor = Color(0xFFFF4B8B)
+            )
+        )
+
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // ---------- CHAMP EMAIL ----------
         OutlinedTextField(
@@ -232,28 +267,28 @@ fun LoginScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Vous n’avez pas de compte ? ",
+                text = "Vous avez deja un compte ? ",
                 fontSize = 13.sp,
                 color = Color(0xFF444444)
             )
             Text(
-                text = "S’inscrire",
+                text = "se connecter",
                 fontSize = 13.sp,
                 color = Color(0xFFFF1F75),
                 fontWeight = FontWeight.SemiBold,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable {
-                    navigateToRegister()
+                    navigateToLogin()
                 }
             )
         }
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+
 @Composable
-fun LoginPreview() {
+fun RegisterPreview(){
     DrcLoveTheme {
-        LoginScreen()
+
     }
 }

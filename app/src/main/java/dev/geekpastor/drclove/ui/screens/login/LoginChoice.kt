@@ -106,7 +106,7 @@ fun LoginChoiceScreen(
                 // ---------- TITLE ----------
                 Text(
                     text = "Ton voyage vers le bonheur commence ici.",
-                    style = MaterialTheme.typography.headlineLarge.copy(
+                    style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.Medium,
                         color = Color(0xFF444444)
                     ),

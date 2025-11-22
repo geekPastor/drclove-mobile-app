@@ -4,5 +4,7 @@ enum class Routes {
     SplashScreen,
     WelcomeScreen,
     OnBoardingScreen,
-    LoginChoiceScreen
+    LoginChoiceScreen,
+    LoginScreen,
+    RegisterScreen
 }

@@ -3,7 +3,7 @@ name: Android Release CI
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   send-apk:

@@ -12,6 +12,7 @@ sealed class Destination(val route: Routes){
     data object LoginChoiceScreen: Destination(Routes.LoginChoiceScreen)
     data object LoginScreen: Destination(Routes.LoginScreen)
     data object RegisterScreen: Destination(Routes.RegisterScreen)
+    data object ProfileOnboardingScreen: Destination(Routes.ProfileOnboardingScreen)
 }
 
 fun NavDestination?.isCurrentDestination(destination: Destination): Boolean{

@@ -6,5 +6,6 @@ enum class Routes {
     OnBoardingScreen,
     LoginChoiceScreen,
     LoginScreen,
-    RegisterScreen
+    RegisterScreen,
+    ProfileOnboardingScreen
 }

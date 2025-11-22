@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,8 +33,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -46,11 +43,11 @@ import dev.geekpastor.drclove.ui.theme.DrcLoveTheme
 
 @Composable
 fun RegisterRoute(
-    navigateToHome: () -> Unit = {},
+    navigateToSetUpProfile: () -> Unit = {},
     navigateToLogin: () -> Unit = {}
 ){
     RegisterScreen(
-        navigateToHome = navigateToHome,
+        navigateToHome = navigateToSetUpProfile,
         navigateToLogin = navigateToLogin
     )
 }
@@ -62,8 +59,9 @@ fun RegisterScreen(
 ){
 
     var email by remember { mutableStateOf("") }
-    var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    var confirmPassword by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -93,35 +91,6 @@ fun RegisterScreen(
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        // ---------- CHAMP Nom complet ----------
-        OutlinedTextField(
-            value = userName,
-            onValueChange = { userName = it },
-            modifier = Modifier
-                .fillMaxWidth(),
-            placeholder = {
-                Text("Taper votre nom complet")
-            },
-            singleLine = true,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = null,
-                    tint = Color(0xFFFF4B8B)
-                )
-            },
-            shape = RoundedCornerShape(50.dp),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                cursorColor = Color(0xFFFF4B8B)
-            )
-        )
 
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -161,6 +130,38 @@ fun RegisterScreen(
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
+            modifier = Modifier
+                .fillMaxWidth(),
+            placeholder = {
+                Text("*************")
+            },
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = null,
+                    tint = Color(0xFFFF4B8B)
+                )
+            },
+            shape = RoundedCornerShape(50.dp),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                cursorColor = Color(0xFFFF4B8B)
+            )
+        )
+
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // ---------- CHAMP MOT DE PASSE ----------
+        OutlinedTextField(
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
             modifier = Modifier
                 .fillMaxWidth(),
             placeholder = {

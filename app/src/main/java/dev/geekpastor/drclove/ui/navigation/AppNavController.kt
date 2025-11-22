@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.geekpastor.drclove.ui.screens.login.LoginChoiceRoute
 import dev.geekpastor.drclove.ui.screens.login.LoginRoute
 import dev.geekpastor.drclove.ui.screens.onboarding.OnBoardingRoute
+import dev.geekpastor.drclove.ui.screens.profileOnboarding.ProfileOnboardingRoute
 import dev.geekpastor.drclove.ui.screens.register.RegisterRoute
 import dev.geekpastor.drclove.ui.screens.splash.SplashRoute
 import dev.geekpastor.drclove.ui.screens.welcome.WelcomeRoute
@@ -70,7 +71,9 @@ fun AppNavController(
                 navigateToRegister = {
                     navController.navigate(Destination.RegisterScreen.route.name)
                 },
-                navigateToHome = {}
+                navigateToSetUpProfile = {
+                    navController.navigate(Destination.ProfileOnboardingScreen.route.name)
+                }
             )
         }
 
@@ -81,8 +84,18 @@ fun AppNavController(
                 navigateToLogin = {
                     navController.navigate(Destination.LoginScreen.route.name)
                 },
-                navigateToHome = {}
+                navigateToSetUpProfile = {
+                    navController.navigate(Destination.ProfileOnboardingScreen.route.name)
+                }
             )
+        }
+
+        composable(
+            route = Destination.ProfileOnboardingScreen.route.name
+        ) {
+            ProfileOnboardingRoute {
+
+            }
         }
     }
 }

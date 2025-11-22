@@ -24,7 +24,7 @@ object DRCLoveColor {
         override val OnTertiaryContainer = Color(0xFF3D2A00) // Doré foncé
 
         // --- Background & Surface ---
-        override val Background = Color(0xFFFFFFFF)       // Blanc
+        override val Background = Color(0xFFF3EFEF)       // Blanc
         override val OnBackground = Color(0xFF12020C)     // Noir profond
 
         override val Surface = Color(0xFFFFFFFF)

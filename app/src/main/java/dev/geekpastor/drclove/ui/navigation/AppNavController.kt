@@ -6,7 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.geekpastor.drclove.ui.screens.login.LoginChoiceRoute
+import dev.geekpastor.drclove.ui.screens.login.LoginRoute
 import dev.geekpastor.drclove.ui.screens.onboarding.OnBoardingRoute
+import dev.geekpastor.drclove.ui.screens.register.RegisterRoute
 import dev.geekpastor.drclove.ui.screens.splash.SplashRoute
 import dev.geekpastor.drclove.ui.screens.welcome.WelcomeRoute
 
@@ -40,7 +43,46 @@ fun AppNavController(
         composable(
             route = Destination.OnBoardingScreen.route.name
         ){
-            OnBoardingRoute {  }
+            OnBoardingRoute(
+                navigateToLoginChoice = {
+                    navController.navigate(Destination.LoginChoiceScreen.route.name)
+                }
+            )
+        }
+
+        composable(
+            route = Destination.LoginChoiceScreen.route.name
+        ) {
+            LoginChoiceRoute(
+                onLoginClick = {
+                    navController.navigate(Destination.LoginScreen.route.name)
+                },
+                onRegisterClick = {
+                    navController.navigate(Destination.RegisterScreen.route.name)
+                }
+            )
+        }
+
+        composable(
+            route = Destination.LoginScreen.route.name
+        ) {
+            LoginRoute(
+                navigateToRegister = {
+                    navController.navigate(Destination.RegisterScreen.route.name)
+                },
+                navigateToHome = {}
+            )
+        }
+
+        composable(
+            route = Destination.RegisterScreen.route.name
+        ) {
+            RegisterRoute(
+                navigateToLogin = {
+                    navController.navigate(Destination.LoginScreen.route.name)
+                },
+                navigateToHome = {}
+            )
         }
     }
 }

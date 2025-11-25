@@ -48,13 +48,13 @@ fun SocialButton(
             Image(
                 painter = painterResource(id = iconRes),
                 contentDescription = null,
-                modifier = Modifier.size(22.dp)
+                modifier = Modifier.size(50.dp)
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(30.dp))
             Text(
                 text = text,
-                fontSize = 14.sp,
-                color = Color(0xFF222222)
+                color = Color(0xFF222222),
+                style = MaterialTheme.typography.titleLarge
             )
         }
     }

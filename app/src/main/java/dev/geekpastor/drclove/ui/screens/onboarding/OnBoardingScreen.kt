@@ -79,11 +79,6 @@ fun OnBoardingScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    listOf(Color.White, Color(0xFFF8D9EC))
-                )
-            )
     ) {
 
         Column(
@@ -104,7 +99,6 @@ fun OnBoardingScreen(
             Text(
                 text = pages[pagerState.currentPage].description,
                 modifier = Modifier.padding(16.dp),
-                color = Color(0xFF222222),
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Medium
                 ),
@@ -216,7 +210,11 @@ fun OnBoardingScreen(
                         .height(50.dp),
                     shape = RoundedCornerShape(40.dp)
                 ) {
-                    Text( text = if (pagerState.currentPage > 0) "Retour" else "Sauter", color = Color.Black)
+                    Text(
+                        text = if (pagerState.currentPage > 0) "Retour" else "Sauter",
+                        color = Color.Black,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
 
                 // Suivant / Terminer
@@ -248,8 +246,7 @@ fun OnBoardingScreen(
                     Text(
                         text = if (pagerState.currentPage == pages.lastIndex) "Terminer" else "Suivant",
                         color = Color.White,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
 

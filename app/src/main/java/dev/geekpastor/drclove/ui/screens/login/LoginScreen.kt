@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -83,7 +84,6 @@ fun LoginScreen(
             text = "Connectez-vous",
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Medium,
-                color = Color(0xFF2C2C2C)
             )
         )
 
@@ -96,7 +96,10 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth(),
             placeholder = {
-                Text("Taper votre adresse email")
+                Text(
+                    "Taper votre adresse email",
+                    style = MaterialTheme.typography.bodyMedium
+                )
             },
             singleLine = true,
             leadingIcon = {
@@ -115,6 +118,9 @@ fun LoginScreen(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
                 cursorColor = Color(0xFFFF4B8B)
+            ),
+            textStyle = TextStyle(
+                color = Color.Black
             )
         )
 
@@ -127,7 +133,8 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth(),
             placeholder = {
-                Text("*************")
+                Text(
+                    "*************")
             },
             singleLine = true,
             leadingIcon = {
@@ -146,6 +153,9 @@ fun LoginScreen(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
                 cursorColor = Color(0xFFFF4B8B)
+            ),
+            textStyle = TextStyle(
+                color = Color.Black
             )
         )
 
@@ -173,8 +183,7 @@ fun LoginScreen(
             Text(
                 text = "Continuer",
                 color = Color.White,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp
+                style = MaterialTheme.typography.titleLarge
             )
         }
 
@@ -205,7 +214,7 @@ fun LoginScreen(
         // ---------- BOUTON GOOGLE ----------
         SocialButton(
             iconRes = R.drawable.ic_google, // mets ton icône Google ici
-            text = "Se connecter avec google",
+            text = "Continuer avec google",
             onClick = {
                 navigateToHome()
             }
@@ -216,7 +225,7 @@ fun LoginScreen(
         // ---------- BOUTON FACEBOOK ----------
         SocialButton(
             iconRes = R.drawable.ic_facebook, // mets ton icône Facebook ici
-            text = "Se connecter avec facebook",
+            text = "Continuer avec facebook",
             onClick = {
                 navigateToHome()
             }
@@ -232,7 +241,6 @@ fun LoginScreen(
             Text(
                 text = "Vous n’avez pas de compte ? ",
                 fontSize = 13.sp,
-                color = Color(0xFF444444)
             )
             Text(
                 text = "S’inscrire",

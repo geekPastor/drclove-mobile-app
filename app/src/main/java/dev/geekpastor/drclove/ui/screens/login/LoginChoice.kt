@@ -1,5 +1,6 @@
 package dev.geekpastor.drclove.ui.screens.login
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -55,8 +56,7 @@ fun LoginChoiceScreen(
 ){
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF8F3F4)),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -77,8 +77,9 @@ fun LoginChoiceScreen(
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(28.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+            border = BorderStroke(1.dp, Color.White)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -108,7 +109,6 @@ fun LoginChoiceScreen(
                     text = "Ton voyage vers le bonheur commence ici.",
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF444444)
                     ),
                     textAlign = TextAlign.Center,
                 )
@@ -122,7 +122,6 @@ fun LoginChoiceScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 8.dp),
-                    color = Color(0xFF444444)
                 )
 
                 Spacer(modifier = Modifier.height(28.dp))
@@ -167,7 +166,6 @@ fun LoginChoiceScreen(
             Text(
                 text = "Vous n’avez pas de compte ? ",
                 fontSize = 14.sp,
-                color = Color(0xFF444444)
             )
             Text(
                 text = "S’inscrire",
